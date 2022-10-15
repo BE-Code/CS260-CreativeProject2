@@ -9,9 +9,17 @@ document.getElementById("searchSubmit").addEventListener("click", function(event
     search(value);
 });
 
+document.getElementById("searchInput").addEventListener("keyup", function(event) {
+    event.preventDefault();
+    const value = document.getElementById("searchInput").value;
+    if (value === "") return;
+    search(value);
+});
+
 function search(value) {
-    // const url = 'https://api.watchmode.com/v1/search/?apiKey=' + watchmodeKey + '&search_field=name&types=movie&search_value=' + value;
     const url = "https://www.omdbapi.com/?i=tt3896198&apikey=" + omdbKey + "&s=" + value;
+
+    if (value < 3) return;
 
     fetch(url)
         .then(response => {
