@@ -25,8 +25,10 @@ async function getSearchSuggestions(query) {
 
     let results = json.Search;
     for (let i = 0; i < results.length; i++) {
-        
-        titles.push(results[i].Title + ' (' + results[i].Year + ')');
+        let result = {};
+        result.resultText = results[i].Title + ' (' + results[i].Year + ')';
+        result.imdbID = results[i].imdbID;
+        titles.push(result);
     }
 
     return titles;
@@ -55,7 +57,9 @@ function autocomplete(inp) {
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", async function(e) {
-        let arr = await getSearchSuggestions(this.value);
+        let searchData = await getSearchSuggestions(this.value);
+        let imdbIDs = searchData.map(e => e.imdbID);
+        let arr = searchData.map(e => e.resultText);
 
         var a, b, i, val = this.value;
         /*close any already open lists of autocompleted values*/
@@ -72,15 +76,18 @@ function autocomplete(inp) {
         for (i = 0; i < arr.length; i++) {
             /*create a DIV element for each matching element:*/
             b = document.createElement("DIV");
-            /*make the matching letters bold:*/
-            b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-            b.innerHTML += arr[i].substr(val.length);
+            b.innerHTML = arr[i];
             /*insert a input field that will hold the current array item's value:*/
-            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+            b.innerHTML += "<input type='hidden' value='" + arr[i] + "' data-imdb='" + imdbIDs[i] + "'>";
+            
             /*execute a function when someone clicks on the item value (DIV element):*/
             b.addEventListener("click", function(e) {
                 /*insert the value for the autocomplete text field:*/
-                inp.value = this.getElementsByTagName("input")[0].value;
+                let clickedElem = this.getElementsByTagName("input")[0];
+                inp.value = clickedElem.value;
+                
+                showMovie(clickedElem.getAttribute('data-imdb'));
+                
                 /*close the list of autocompleted values,
                 (or any other open lists of autocompleted values:*/
                 closeAllLists();
