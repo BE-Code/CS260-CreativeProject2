@@ -172,9 +172,10 @@ function selectMovie(event) {
 function showMovieInfo(imdbID) {
     const resultsDiv = document.getElementById('results');
     const movieInfoDiv = document.getElementById('movieInfo');
+    const searchResultsHeading = document.querySelector("#searchDiv > h2");
 
     resultsDiv.style.display = 'none';
+    searchResultsHeading.style.display = 'none';
     movieInfoDiv.style.display = 'flex';
-
 }
 /*************************** End Search Results ***************************************/
