@@ -11,7 +11,31 @@ h2 {
 #results {
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid white;
+    justify-content: space-around;
     margin: auto;
     width: 80%;
+}
+
+#results img {
+    width: 200px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+#results img:hover {
+    cursor: pointer;
+    color: beige;
+    box-shadow: 0 5px 5px rgba(213, 213, 190,2), 
+                0 10px 25px rgba(166,173,201,2);
+}
+
+#movieInfo {
+    display: none;
+    align-items: flex-start;
+}
+
+#movieInfo img {
+    width: 200px;
+    margin: 10px;
+    border-radius: 10px;
 }
