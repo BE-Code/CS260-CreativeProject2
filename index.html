@@ -10,6 +10,7 @@
   <!--Styles-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
   <link rel='stylesheet' href='styles.css' />
+  <link rel='stylesheet' href='autocomplete.css' />
 
   <!--Bootstrap Scripts-->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" defer></script>
@@ -21,18 +22,17 @@
   <h1>Web TV</h1>
 
   <form>
-    <label>Enter a Movie or Show</label>
-    <input id="searchInput" type="text"></input><br />
+    <div class="autocomplete">
+      <input id="searchInput" type="text" placeholder="Enter a Movie or Show"></input><br>
+    </div>
     <input id="searchSubmit" type="submit" value="Submit"></input>
   </form>
   <div id="searchResults">
   </div>
 
 
+</body>
+<script text="type/javascript" src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.min.js" integrity="sha512-/hVAZO5POxCKdZMSLefw30xEVwjm94PAV9ynjskGbIpBvHO9EBplEcdUlBdCKutpZsF+La8Ag4gNrG0gAOn3Ig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
-  </body>
-  <script src="autocomplete.js"></script>
-  <script text="type/javascript" src="script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.min.js" integrity="sha512-/hVAZO5POxCKdZMSLefw30xEVwjm94PAV9ynjskGbIpBvHO9EBplEcdUlBdCKutpZsF+La8Ag4gNrG0gAOn3Ig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </html>
