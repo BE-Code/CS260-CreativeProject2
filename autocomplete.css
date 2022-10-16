@@ -6,6 +6,14 @@ body {
     font: 16px Arial;
 }
 
+#siteName {
+    text-align: left;
+}
+
+#searchContainer {
+    
+}
+
 .autocomplete {
     /*the container must be positioned relative:*/
     position: relative;
