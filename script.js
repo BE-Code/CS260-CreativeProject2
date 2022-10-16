@@ -32,6 +32,8 @@ async function search(value) {
     return response.json();
 }
 
-async function getStreamingServices() {
-
+async function getStreamingServices(IMDBid) {
+    const url = 'https://api.watchmode.com/v1/title/'+ IMDBid +'/sources/?apiKey=' + watchmodeKey;
+    let response = await fetch(url);
+    return response.json();
 }
