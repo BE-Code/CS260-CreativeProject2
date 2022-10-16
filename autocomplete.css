@@ -8,13 +8,14 @@ body {
 
 #siteName {
     text-align: left;
-}
-
-#searchContainer {
-    
+    position: absolute;
+    padding-left: 1.6rem;
+    padding-top: 0.625rem;
+    /*margin: 6rem auto;*/
 }
 
 .autocomplete {
+    width: 100%;
     /*the container must be positioned relative:*/
     position: relative;
     display: inline-block;
@@ -65,4 +66,62 @@ input[type=submit] {
     /*when navigating through the items using the arrow keys:*/
     background-color: DodgerBlue !important;
     color: #ffffff;
+}
+
+
+
+
+
+/* Search Bar */
+
+.searchContainer {
+    /*display: flex;*/
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    width: 100%;
+    min-width: 31.25rem;
+    max-width: 31.25rem;
+    margin: 6rem auto;
+}
+
+.label {
+    font-size: .625rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: +1.3px;
+    margin-bottom: 1rem;
+}
+
+.searchBar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#searchInput {
+    width: 100%;
+    height: 2.8rem;
+    background: #f5f5f5;
+    outline: none;
+    border: none;
+    border-radius: 1.625rem;
+    padding: 0 3.5rem 0 1.5rem;
+    font-size: 1rem;
+}
+
+#searchSubmit {
+    width: 3.5rem;
+    height: 2.8rem;
+    margin-left: -3.5rem;
+    position: relative;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+#searchSubmit:hover {
+    cursor: pointer;
 }

@@ -72,6 +72,10 @@ function autocomplete(inp) {
             b.innerHTML = arr[i];
             /*insert a input field that will hold the current array item's value:*/
             b.innerHTML += "<input type='hidden' value='" + arr[i] + "' data-imdb='" + imdbIDs[i] + "'>";
+            
+            if (i == arr.length - 1) {
+                b.style.borderRadius = "0 0 1.625rem 1.625rem";
+            }
 
             /*execute a function when someone clicks on the item value (DIV element):*/
             b.addEventListener("click", function(e) {
@@ -86,6 +90,13 @@ function autocomplete(inp) {
                 closeAllLists();
             });
             a.appendChild(b);
+        }
+        if (arr.length > 0) {
+            let sBar = document.getElementById('searchInput');
+            sBar.style.borderRadius = "1.625rem 1.625rem 0 0";
+        } else {
+            let sBar = document.getElementById('searchInput');
+            sBar.style.borderRadius = "1.625rem";
         }
     });
     /*execute a function presses a key on the keyboard:*/
@@ -143,6 +154,9 @@ function autocomplete(inp) {
                 x[i].parentNode.removeChild(x[i]);
             }
         }
+        
+        let sBar = document.getElementById('searchInput');
+        sBar.style.borderRadius = "1.625rem";
     }
     /*execute a function when someone clicks in the document:*/
     document.addEventListener("click", function(e) {
