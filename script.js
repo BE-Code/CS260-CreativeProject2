@@ -72,15 +72,15 @@ function autocomplete(inp) {
             b.innerHTML = arr[i];
             /*insert a input field that will hold the current array item's value:*/
             b.innerHTML += "<input type='hidden' value='" + arr[i] + "' data-imdb='" + imdbIDs[i] + "'>";
-            
+
             /*execute a function when someone clicks on the item value (DIV element):*/
             b.addEventListener("click", function(e) {
                 /*insert the value for the autocomplete text field:*/
                 let clickedElem = this.getElementsByTagName("input")[0];
                 inp.value = clickedElem.value;
-                
-                showMovie(clickedElem.getAttribute('data-imdb'));
-                
+
+                showMovieInfo(clickedElem.getAttribute('data-imdb'));
+
                 /*close the list of autocompleted values,
                 (or any other open lists of autocompleted values:*/
                 closeAllLists();
