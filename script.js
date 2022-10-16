@@ -28,8 +28,23 @@ async function getSearchSuggestions(query) {
 }
 
 async function getSearchResults(query) {
-    let json = await search(query);
-    console.log(json);
+    const json = await search(query);
+    const results = json.Search;
+    const searchDiv = document.getElementById('searchDiv');
+    const searchQuery = document.querySelector('#searchDiv > h2');
+    let resultsContainer = document.getElementById('results');
+
+    searchDiv.style.display = 'block';
+    searchQuery.innerText += ' ' + query;
+
+    let htmlToAppend = '';
+    for (let i = 0; i < results.length; i++) {
+        htmlToAppend += `<img class="poster" data-imdb="${results[i].imdbID}" src="${results[i].Poster}">`;
+    }
+
+    let sanitizedHTML = DOMPurify.sanitize(htmlToAppend);
+    resultsContainer.innerHTML = sanitizedHTML;
+    
 }
 
 async function search(value) {
@@ -172,7 +187,7 @@ const moviePosterList = document.getElementsByClassName('poster');
 
 document.addEventListener('click', selectMovie);
 
-function selectMovie(event) {
+async function selectMovie(event) {
     let moviePoster = event.target;
     if (!moviePoster.classList.contains('poster')) return;
 
@@ -180,10 +195,10 @@ function selectMovie(event) {
     searchBar.style.display = 'none';
 
     let imdbID = moviePoster.getAttribute('data-imdb');
-    showMovieInfo(imdbID);
+    await showMovieInfo(imdbID, moviePoster);
 }
 
-function showMovieInfo(imdbID) {
+async function showMovieInfo(imdbID, moviePosterHTML = null) {
     const resultsDiv = document.getElementById('results');
     const movieInfoDiv = document.getElementById('movieInfo');
     const searchResultsHeading = document.querySelector("#searchDiv > h2");
@@ -191,5 +206,29 @@ function showMovieInfo(imdbID) {
     resultsDiv.style.display = 'none';
     searchResultsHeading.style.display = 'none';
     movieInfoDiv.style.display = 'flex';
+
+    let movieInfo = await fetch(`https://api.watchmode.com/v1/title/${imdbID}/sources/?apiKey=${watchmodeKey}`).then(response => {return response.json()});
+    let movieTitleJson = await fetch("https://www.omdbapi.com/?i=" + imdbID + "&apikey=" + omdbKey).then(response => {return response.json()});
+
+    let htmlToAppend = '';
+    htmlToAppend += moviePosterHTML.outerHTML;
+    htmlToAppend += 
+        `<div id="innerMovieInfo">
+            <p id="title">${movieTitleJson.Title}</p>
+            <ul>
+            </ul>
+        </div>`;
+
+    movieInfoDiv.innerHTML = htmlToAppend;
+    console.log(movieInfo);
+
+    let streamingList = document.querySelector('#innerMovieInfo > ul'); 
+    let streamingOptions = ''
+
+    for (let i = 0; i < movieInfo.length; i++) {
+        streamingOptions += `<li><a href="${movieInfo[i].web_url}">${movieInfo[i].type} at ${movieInfo[i].name} (${movieInfo[i].format})</a></li>`;
+    }
+
+    streamingList.innerHTML = streamingOptions;
 }
 /*************************** End Search Results ***************************************/
