@@ -1,35 +1,37 @@
 const watchmodeKey = 'KymHqOJePgRiC2m3lXBM49ohK4n9KTA5yZ6a6CJe';
 const omdbKey = 'd3e7890';
 
-
-document.getElementById("searchSubmit").addEventListener("click", function(event) {
+document.getElementById("searchSubmit").addEventListener("click", async function(event) {
     event.preventDefault();
     const value = document.getElementById("searchInput").value;
     if (value === "") return;
-    search(value);
+    await getSearchResults(value);
 });
 
-document.getElementById("searchInput").addEventListener("keyup", function(event) {
+document.getElementById("searchInput").addEventListener("keyup", async function(event) {
     event.preventDefault();
     const value = document.getElementById("searchInput").value;
     if (value === "") return;
-    search(value);
+    await getSearchSuggestions(value);
 });
 
-function search(value) {
-    const url = "https://www.omdbapi.com/?i=tt3896198&apikey=" + omdbKey + "&s=" + value;
-
-    if (value < 3) return;
-
-    fetch(url)
-        .then(response => {
-            return response.json();
-        })
-        .then(json => {
-            console.log(json);
-        });
+async function getSearchSuggestions(query) {
+    if (query.length < 3) return;
+    let json = await search(query);
+    console.log(json);
 }
 
-function getStreamingServices() {
+async function getSearchResults(query) {
+    let json = await search(query);
+    console.log(json);
+}
+
+async function search(value) {
+    const url = "https://www.omdbapi.com/?i=tt3896198&apikey=" + omdbKey + "&s=" + value;
+    let response = await fetch(url);
+    return response.json();
+}
+
+async function getStreamingServices() {
 
 }
