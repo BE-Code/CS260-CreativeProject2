@@ -166,11 +166,11 @@ const moviePosterList = document.getElementsByClassName('poster');
 document.addEventListener('click', selectMovie);
 
 function selectMovie(event) {
-    const searchBar = document.getElementsByTagName('form')[0];
-    searchBar.style.display = 'none';
-    
     let moviePoster = event.target;
     if (!moviePoster.classList.contains('poster')) return;
+
+    const searchBar = document.getElementsByTagName('form')[0];
+    searchBar.style.display = 'none';
 
     let imdbID = moviePoster.getAttribute('data-imdb');
     showMovieInfo(imdbID);
