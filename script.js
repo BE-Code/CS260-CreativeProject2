@@ -191,7 +191,7 @@ async function selectMovie(event) {
     let moviePoster = event.target;
     if (!moviePoster.classList.contains('poster')) return;
 
-    const searchBar = document.getElementsByTagName('form')[0];
+    const searchBar = document.getElementsByClassName('searchContainer')[0];
     searchBar.style.display = 'none';
 
     let imdbID = moviePoster.getAttribute('data-imdb');
@@ -213,11 +213,9 @@ async function showMovieInfo(imdbID, moviePosterHTML = null) {
     let htmlToAppend = '';
     htmlToAppend += moviePosterHTML.outerHTML;
     htmlToAppend += 
-        `<div id="innerMovieInfo">
-            <p id="title">${movieTitleJson.Title}</p>
-            <ul>
-            </ul>
-        </div>`;
+        `<p id="title">${movieTitleJson.Title}</p>
+        <ul>
+        </ul>`;
 
     movieInfoDiv.innerHTML = htmlToAppend;
     console.log(movieInfo);
