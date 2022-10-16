@@ -213,11 +213,9 @@ async function showMovieInfo(imdbID, moviePosterHTML = null) {
     let htmlToAppend = '';
     htmlToAppend += moviePosterHTML.outerHTML;
     htmlToAppend += 
-        `<div id="innerMovieInfo">
-            <p id="title">${movieTitleJson.Title}</p>
-            <ul>
-            </ul>
-        </div>`;
+        `<p id="title">${movieTitleJson.Title}</p>
+        <ul>
+        </ul>`;
 
     movieInfoDiv.innerHTML = htmlToAppend;
     console.log(movieInfo);
