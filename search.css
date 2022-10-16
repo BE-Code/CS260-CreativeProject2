@@ -8,6 +8,10 @@ h2 {
     margin-bottom: 1%;
 }
 
+#searchDiv {
+    display: none;
+}
+
 #results {
     display: flex;
     flex-wrap: wrap;
