@@ -8,13 +8,6 @@ document.getElementById("searchSubmit").addEventListener("click", async function
     await getSearchResults(value);
 });
 
-// document.getElementById("searchInput").addEventListener("input", async function(event) {
-//     event.preventDefault();
-//     const value = document.getElementById("searchInput").value;
-//     if (value === "") return;
-//     await getSearchSuggestions(value);
-// });
-
 async function getSearchSuggestions(query) {
     let titles = [];
 
